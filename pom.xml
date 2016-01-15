@@ -339,6 +339,7 @@
 		<finalName>jeewx</finalName>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
 				<configuration>
@@ -347,6 +348,7 @@
 					<encoding>${project.build.sourceEncoding}</encoding><!-- 此插件无设置时会使用默认的字符集 -->
 				</configuration>
 			</plugin>
+	        
 			<!-- 
 				scanIntervalSeconds 配置扫描时间时间, 如果有文件变动, 如pom.xml,web.xml或classes, 则jetty会重新加载应用, 相当方便
 				contextPath 配置ROOT, 即将web的上下文路径, 改为 /
@@ -362,6 +364,9 @@
 							<port>8888</port>
 						</connector>
 					</connectors>
+					<compilerArguments>
+	                   <extdirs>src\main\webapp\WEB-INF\lib</extdirs>
+	                </compilerArguments>
 					<!-- <webDefaultXml>src/main/resources/jetty/webdefault.xml</webDefaultXml> -->
 					<!-- <webAppSourceDirectory>src/main/webapp</webAppSourceDirectory> -->
 	                <!-- <contextPath>/</contextPath> -->
