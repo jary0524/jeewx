@@ -13,7 +13,7 @@
 		<!-- 指明编译源代码时使用的字符编码，maven编译的时候默认使用的GBK编码， 通过project.build.sourceEncoding属性设置字符编码，告诉maven这个项目使用UTF-8来编译 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- jdk的版本 -->
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
         <!-- spring版本号 -->
         <springframework.version>4.1.6.RELEASE</springframework.version>
         
