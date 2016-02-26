@@ -157,7 +157,12 @@ public class WeixinAccountEntity implements java.io.Serializable {
 	public void setAccountnumber(java.lang.String accountnumber){
 		this.accountnumber = accountnumber;
 	}
-	
+
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  原始ID
+	 */
+	@Column(name ="WEIXIN_ACCOUNTID",nullable=true,length=50)
 	public java.lang.String getWeixin_accountid() {
 		return weixin_accountid;
 	}

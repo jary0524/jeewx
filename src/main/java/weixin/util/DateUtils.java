@@ -117,7 +117,7 @@ public class DateUtils extends PropertyEditorSupport {
 		if (null != time) {
 			date = new Date(time.getTime());
 		}
-		return date2Str(date_sdf);
+		return date2Str(date, date_sdf);
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class DateUtils extends PropertyEditorSupport {
 	 * @return 字符串
 	 */
 	public static String date2Str(SimpleDateFormat date_sdf) {
-		Date date=getDate();
+		Date date = getDate();
 		if (null == date) {
 			return null;
 		}
@@ -179,7 +179,6 @@ public class DateUtils extends PropertyEditorSupport {
 		try {
 			 date=sformat.parse(data);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return sformat.format(date);
@@ -210,7 +209,7 @@ public class DateUtils extends PropertyEditorSupport {
 	 */
 	public static String getDate(String format) {
 		Date date=new Date();
-		if (null == date) {
+		if (null == format) {
 			return null;
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -598,7 +597,7 @@ public class DateUtils extends PropertyEditorSupport {
 		long millisDiff = getMillis(calSrc) - getMillis(calDes);
 
 		if (flag == 'y') {
-			return (calSrc.get(calSrc.YEAR) - calDes.get(calDes.YEAR));
+			return (calSrc.get(Calendar.YEAR) - calDes.get(Calendar.YEAR));
 		}
 
 		if (flag == 'd') {
@@ -630,9 +629,9 @@ public class DateUtils extends PropertyEditorSupport {
 		if (StringUtils.hasText(text)) {
 			try {
 				if (text.indexOf(":") == -1 && text.length() == 10) {
-					setValue(this.date_sdf.parse(text));
+					setValue(DateUtils.date_sdf.parse(text));
 				} else if (text.indexOf(":") > 0 && text.length() == 19) {
-					setValue(this.datetimeFormat.parse(text));
+					setValue(DateUtils.datetimeFormat.parse(text));
 				} else {
 					throw new IllegalArgumentException(
 							"Could not parse date, date format is error ");

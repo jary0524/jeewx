@@ -57,29 +57,22 @@ public class TagUtil {
 	 * 
 	 * 获取对象内对应字段的值
 	 * @param fields
+	 * 
+	 * @author Jary
+	 * @since 2016年1月16日 下午6:35:05
 	 */
-	public static Object fieldNametoValues(String FiledName, Object o){
-		Object value = "";
-		String fieldName = "";
+	public static Object fieldNametoValues(String FiledName, Object object){
+		Object value = null;
+		String fieldName = FiledName;
 		String childFieldName = null;
-		ReflectHelper reflectHelper=new ReflectHelper(o);
-		if (FiledName.indexOf("_") == -1) {
-			if(FiledName.indexOf(".") == -1){
-				fieldName = FiledName;
-			}else{
-				fieldName = FiledName.substring(0, FiledName.indexOf("."));//外键字段引用名
-				childFieldName = FiledName.substring(FiledName.indexOf(".") + 1);//外键字段名
-			}
-		} else {
-			fieldName = FiledName.substring(0, FiledName.indexOf("_"));//外键字段引用名
-			childFieldName = FiledName.substring(FiledName.indexOf("_") + 1);//外键字段名
+		ReflectHelper reflectHelper = new ReflectHelper(object);
+		if(FiledName.indexOf(".") != -1){
+			fieldName = FiledName.substring(0, FiledName.indexOf("."));//外键字段引用名
+			childFieldName = FiledName.substring(FiledName.indexOf(".") + 1);//外键字段名
 		}
-		value = reflectHelper.getMethodValue(fieldName)==null?"":reflectHelper.getMethodValue(fieldName);
-		if (value !=""&&value != null && (FiledName.indexOf("_") != -1||FiledName.indexOf(".") != -1)) {
+		value = reflectHelper.getMethodValue(fieldName);
+		if (childFieldName!=null) {
 			value = fieldNametoValues(childFieldName, value);
-		}
-		if(value != "" && value != null) {
-			value = value.toString().replaceAll("\r\n", "");
 		}
 		return value;
 	}

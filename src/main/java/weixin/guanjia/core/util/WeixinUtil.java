@@ -2,13 +2,12 @@ package weixin.guanjia.core.util;
 
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -119,9 +118,9 @@ public class WeixinUtil {
     	AccessTokenYw accessTocken = getRealAccessToken(systemService);
     	
     	if(accessTocken!=null){
-    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     		java.util.Date end = new java.util.Date();
-    		java.util.Date start = new java.util.Date(accessTocken.getAddTime().getTime());
+    		//java.util.Date start = new java.util.Date(accessTocken.getAddTime().getTime());
         	if(end.getTime()-accessTocken.getAddTime().getTime()>accessTocken.getExpires_in()*1000){
         		 AccessToken accessToken = null;
                  String requestUrl = access_token_url.replace("APPID", appid).replace("APPSECRET", appsecret);
@@ -214,8 +213,11 @@ public class WeixinUtil {
      * @param bstr 
      * @return String 
      */  
-    public static String encode(byte[] bstr){  
-    	return new sun.misc.BASE64Encoder().encode(bstr);  
+    public static String encode(byte[] srcContent){
+		if(srcContent == null) {
+			return null;
+		}
+		return Base64.getEncoder().encodeToString(srcContent);
     }  
   
     /** 
@@ -223,17 +225,11 @@ public class WeixinUtil {
      * @param str 
      * @return string 
      */  
-    public static byte[] decode(String str){ 
-    	
-	    byte[] bt = null;  
-	    try {  
-	        sun.misc.BASE64Decoder decoder = new sun.misc.BASE64Decoder();  
-	        bt = decoder.decodeBuffer( str );  
-	    } catch (IOException e) {  
-	        e.printStackTrace();  
-	    }  
-        return bt;  
-        
+    public static byte[] decode(String base64Code){
+		if (base64Code==null) {
+			return null;
+		}
+		return Base64.getDecoder().decode(base64Code);
     }  
     
 }

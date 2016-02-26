@@ -93,7 +93,7 @@ public class LoginController extends BaseController{
 	public ModelAndView pwdInit(HttpServletRequest request) {
 		ModelAndView modelAndView = null;
 		TSUser user = new TSUser();
-		user.setUserName("jary0524");
+		user.setUserName("admin");
 		String newPwd = "123456";
 		userService.pwdInit(user, newPwd);
 		modelAndView = new ModelAndView(new RedirectView(

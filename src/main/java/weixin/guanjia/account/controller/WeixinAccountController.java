@@ -82,6 +82,9 @@ public class WeixinAccountController extends BaseController {
 	public void datagrid(WeixinAccountEntity weixinAccount,
 			HttpServletRequest request, HttpServletResponse response,
 			DataGrid dataGrid) {
+		//TODO 写到拦截器里
+		String queryString = request.getQueryString();
+		logger.info("请求参数:" + queryString);
 		CriteriaQuery cq = new CriteriaQuery(WeixinAccountEntity.class,
 				dataGrid);
 		// 查询条件组装器
